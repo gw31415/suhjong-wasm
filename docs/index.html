@@ -62,7 +62,7 @@
 		document.getElementById('score').textContent = score.toString()
 	}
 	function set_eqns(eqns) {
-		if (eqns.length === 0 || !eqns[0].includes("=")) {
+		if (eqns.length === 0) {
 			document.getElementById("eqn-sec").style.display = "none"
 		}
 		else {
@@ -92,10 +92,14 @@
 			if (cards.length === 5) {
 				if (!/^\d{5}$/.test(cards)) return
 				const output = best_equations(cards[0], cards[1], cards[2], cards[3], cards[4])
-				const eqns = output.split(";")
-				const isZero = !(output.includes("=") && eqns.length !== 0)
-				set_score(isZero ? 0 : calc_equation(eqns[0]))
-				set_eqns(eqns);
+				if (output.includes("=")) {
+					const eqns = output.split(";")
+					set_score(calc_equation(eqns[0]))
+					set_eqns(eqns)
+				} else {
+					set_score(0)
+					set_eqns([])
+				}
 				document.getElementById("res").style.display = "block"
 			} else {
 				document.getElementById("res").style.display = "none"
