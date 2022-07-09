@@ -1,0 +1,14 @@
+{
+  "name": "suhjong-wasm",
+  "description": "数雀文字列を扱うcrate: suhjong のwasmバージョンです",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "suhjong_wasm_bg.wasm",
+    "suhjong_wasm.js",
+    "suhjong_wasm.d.ts"
+  ],
+  "module": "suhjong_wasm.js",
+  "types": "suhjong_wasm.d.ts",
+  "sideEffects": false
+}

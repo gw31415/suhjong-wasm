@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Suhjong highest scores</title>
+	<meta name="description"
+		content="A web application to calculate the highest score from a hand in the card game: Suhjong">
+	<meta name="author" content="Amadeus_vn">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="apple-touch-icon" href="favicon.png">
+</head>
+<style>
+	body,
+	input {
+		text-align: center;
+	}
+
+	input {
+		font-size: 3ex;
+		margin-top: 3ex;
+		margin-bottom: 3ex;
+		border: solid 0px;
+		outline: none;
+	}
+
+	li,
+	h5 {
+		text-align: left;
+	}
+</style>
+
+<body>
+	<div class="container"
+		style="display:flex;justify-content:center;align-items:center;min-height:100vh;min-height:100dvh">
+		<div style="width:100%">
+			<input maxlength="5" pattern="\d{5}" inputmode="numeric" placeholder="Input 5 numbers...." id="input" />
+			<div id="res" style="display:none">
+				<h5>The Highest Score is:</h5>
+				<div style="font-size:100px" id="score"></div>
+				<div id="eqn-sec" style="display:none">
+					<h5>Available equations:</h5>
+					<div>
+						<ul style="font-size:25px;display:inline-block" id="eqns"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="module">
+	import init, {best_equations, calc_equation} from './pkg/suhjong_wasm.js'
+
+	function insert(str, idx, ins) {
+		return str.slice(0, idx) + ins + str.slice(idx);
+	}
+	function set_score(score) {
+		document.getElementById('score').textContent = score.toString()
+	}
+	function set_eqns(eqns) {
+		if (eqns.length === 0) {
+			document.getElementById("eqn-sec").style.display = "none"
+		}
+		else {
+			const ulist = document.getElementById('eqns')
+			ulist.replaceChildren.apply(ulist, eqns.map(function (eqn) {
+				let display = eqn
+				if (
+					(eqn[3] === '*' || eqn[3] === '/') &&
+					(eqn[1] === '+' || eqn[1] === '-')
+				) {
+					display = '(' + insert(eqn, 3, ')')
+				}
+				display = display.replaceAll('*', '×')
+				display = display.replaceAll(/\D/g, " $& ")
+				const li = document.createElement('li')
+				li.textContent = display
+				return li
+			}))
+			document.getElementById("eqn-sec").style.display = "block"
+		}
+	}
+
+	(async function () {
+		await init()
+		document.getElementById('input').addEventListener("input", async function (it) {
+			const cards = it.target.value;
+			if (cards.length === 5) {
+				if (!/^\d{5}$/.test(cards)) return
+				const eqns = best_equations(cards[0], cards[1], cards[2], cards[3], cards[4]).split(";")
+				set_score(eqns.length === 0 ? 0 : calc_equation(eqns[0]))
+				set_eqns(eqns);
+				document.getElementById("res").style.display = "block"
+			} else {
+				document.getElementById("res").style.display = "none"
+			}
+		})
+	})()
+</script>
+
+</html>
