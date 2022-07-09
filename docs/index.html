@@ -18,10 +18,11 @@
 	body,
 	input {
 		text-align: center;
+		width: 100%
 	}
 
 	input {
-		font-size: 3ex;
+		min-width: 0;
 		margin-top: 3ex;
 		margin-bottom: 3ex;
 		border: solid 0px;
@@ -29,7 +30,7 @@
 	}
 
 	li,
-	h5 {
+	h1 {
 		text-align: left;
 	}
 </style>
@@ -40,12 +41,12 @@
 		<div style="width:100%">
 			<input maxlength="5" pattern="\d{5}" inputmode="numeric" placeholder="Input 5 numbers...." id="input" />
 			<div id="res" style="display:none">
-				<h5>The Highest Score is:</h5>
+				<h1>The Highest Score is:</h1>
 				<div style="font-size:100px" id="score"></div>
 				<div id="eqn-sec" style="display:none">
-					<h5>Available equations:</h5>
+					<h1>Available equations:</h1>
 					<div>
-						<ul style="font-size:25px;display:inline-block" id="eqns"></ul>
+						<ul style="display:inline-block" id="eqns"></ul>
 					</div>
 				</div>
 			</div>
