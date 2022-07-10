@@ -9,37 +9,105 @@
 	<meta name="author" content="Amadeus_vn">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/skeleton.css">
 	<link rel="icon" type="image/png" href="favicon.png">
 	<link rel="apple-touch-icon" href="favicon.png">
 </head>
 <style>
+	*,
+	*:before,
+	*:after {
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box
+	}
+
+	html {
+		font-size: 120%;
+		-ms-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		font-size: 1.5em;
+		/* currently ems cause chrome bug misinterpreting rems on body element */
+		line-height: 1.6;
+		font-weight: 400;
+		font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: #222;
+		margin: 0;
+	}
+
+	h1 {
+		margin: .5rem 0;
+		font-weight: 300;
+		font-size: 1.2rem;
+		line-height: 1.2;
+	}
+
 	input {
-		border: solid 0px;
+		border: solid 0;
 		outline: none;
+		color: inherit;
+		font: inherit;
+		margin: 0;
 	}
 
 	ul {
 		list-style-type: square;
+		font-size: 90%;
+		display: inline-block;
+	}
+
+	li {
+		margin-bottom: 1rem;
 	}
 
 	body,
 	input {
 		text-align: center;
 		max-width: 100%;
-		overflow: hidden;
 	}
 
 	li,
 	h1 {
 		text-align: left;
 	}
+
+	.container {
+		width: 100%;
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+		min-height: 100dvh
+	}
+
+	@media (min-width: 400px) {
+		.container {
+			width: 85%;
+			padding: 0;
+		}
+	}
+
+	@media (min-width: 550px) {
+		.container {
+			width: 80%;
+		}
+
+		html {
+			font-size: 150%
+		}
+
+		h1 {
+			font-size: 1.5rem;
+		}
+	}
 </style>
 
 <body>
-	<div class="container"
-		style="display:flex;justify-content:center;align-items:center;min-height:100vh;min-height:100dvh">
+	<div class="container" style="">
 		<div style="width:100%">
 			<input maxlength="5" pattern="\d{5}" inputmode="numeric" placeholder="Input 5 numbers...." id="input" />
 			<div id="res" style="display:none">
@@ -48,7 +116,7 @@
 				<div id="eqn-sec" style="display:none">
 					<h1>Available equations:</h1>
 					<div>
-						<ul style="display:inline-block" id="eqns"></ul>
+						<ul id="eqns" />
 					</div>
 				</div>
 			</div>
