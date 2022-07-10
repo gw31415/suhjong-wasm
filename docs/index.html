@@ -139,7 +139,7 @@
 		}
 		else {
 			const ulist = document.getElementById('eqns')
-			ulist.replaceChildren.apply(ulist, eqns.map(function (eqn) {
+			ulist.replaceChildren.apply(ulist, eqns.map(eqn => {
 				let display = eqn
 				if (
 					(eqn[3] === '*' || eqn[3] === '/') &&
@@ -157,9 +157,9 @@
 		}
 	}
 
-	(async function () {
+	(async () => {
 		await init()
-		document.getElementById('input').addEventListener("input", async function (it) {
+		document.getElementById('input').addEventListener("input", async it => {
 			const cards = it.target.value;
 			if (cards.length === 5) {
 				if (!/^\d{5}$/.test(cards)) return
