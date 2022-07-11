@@ -44,26 +44,32 @@ async function set_eqns(eqns) {
 
 (async () => {
 	await init()
-	input.addEventListener('input', async it => {
+	input.addEventListener('input', async () => {
 		const cards = input.value
 		if (cards.length === 5) {
-			if (!isPC) input.blur()
-			if (!/^\d{5}$/.test(cards)) return
+			if (!/^\d*$/.test(cards)) return
+			const jobs = []
+			jobs.push(async () => {
+				if (!isPC) input.blur()
+				document.getElementById('container').style.alignItems = 'start'
+			})
 			const output = best_equations(cards[0], cards[1], cards[2], cards[3], cards[4])
 			if (output.includes("=")) {
 				const eqns = output.split(";")
-				await Promise.all([
+				jobs.push(
 					set_score(calc_equation(eqns[0])),
 					set_eqns(eqns),
-				])
+				)
 			} else {
-				await Promise.all([
+				jobs.push(
 					set_score(0),
 					set_eqns([]),
-				])
+				)
 			}
+			await Promise.all(jobs)
 			document.getElementById("res").style.display = "block"
 		} else {
+			document.getElementById('container').style.alignItems = 'center'
 			document.getElementById("res").style.display = "none"
 		}
 	})

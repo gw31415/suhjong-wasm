@@ -65,14 +65,9 @@ h1 {
 	padding: 0 20px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	min-height: 100vh;
-	min-height: 100dvh
-}
-
-@media (max-height: 101vh) {
-	#container {
-		align-items: center;
-	}
+	min-height: 100dvh;
 }
 
 @media (min-width: 400px) {
@@ -88,7 +83,7 @@ h1 {
 	}
 
 	html {
-		font-size: 150%
+		font-size: 150%;
 	}
 
 	h1 {
