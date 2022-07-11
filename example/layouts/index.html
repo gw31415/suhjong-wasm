@@ -7,12 +7,14 @@
 	<meta name="description" content="{{ .Site.Params.description }}">
 	<meta name="author" content="{{ .Site.Author.name }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600&display=swap&text=%20%28%29%2B-./0123456789%3A%3DAEHISTabceghilmnopqrstuv%C3%97" rel="stylesheet" type="text/css">
 	<link rel="icon" type="image/png" href="{{ .Site.Params.icon }}">
 	<link rel="apple-touch-icon" href="{{ .Site.Params.icon }}">
 </head>
 
 <style>
+{{ with resources.GetRemote "https://fonts.googleapis.com/css?family=Raleway:400,300,600&display=swap&text=%20%28%29%2B-./0123456789%3A%3DAEHISTabceghilmnopqrstuv%C3%97" | resources.ToCSS }}
+{{ .Content | safeCSS}}
+{{ end }}
 {{ with resources.Get "style.scss" | resources.ToCSS }}
 {{ .Content | safeCSS}}
 {{ end }}
