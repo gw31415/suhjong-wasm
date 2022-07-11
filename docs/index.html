@@ -25,14 +25,14 @@
 		font-size: 120%;
 		-ms-text-size-adjust: 100%;
 		-webkit-text-size-adjust: 100%;
+		font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: 400;
 	}
 
 	body {
 		font-size: 1.5em;
 		/* currently ems cause chrome bug misinterpreting rems on body element */
 		line-height: 1.6;
-		font-weight: 400;
-		font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color: #222;
 		margin: 0;
 	}
@@ -73,27 +73,32 @@
 		text-align: left;
 	}
 
-	.container {
+	#container {
 		width: 100%;
 		max-width: 960px;
 		margin: 0 auto;
 		padding: 0 20px;
 		display: flex;
 		justify-content: center;
-		align-items: center;
 		min-height: 100vh;
 		min-height: 100dvh
 	}
 
+	@media (max-height: 101vh) {
+		#container {
+			align-items: center;
+		}
+	}
+
 	@media (min-width: 400px) {
-		.container {
+		#container {
 			width: 85%;
 			padding: 0;
 		}
 	}
 
 	@media (min-width: 550px) {
-		.container {
+		#container {
 			width: 80%;
 		}
 
@@ -108,7 +113,7 @@
 </style>
 
 <body>
-	<div class="container" style="">
+	<div id="container">
 		<div style="width:100%">
 			<input maxlength="5" pattern="\d{5}" inputmode="numeric" placeholder="Input 5 numbers...." id="input" />
 			<div id="res" style="display:none">
