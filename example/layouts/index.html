@@ -40,7 +40,7 @@
 
 <script>{{
 		$js := resources.Get "script.ts" | js.Build (
-			dict "externals" (slice "/pkg/suhjong_wasm.js")
+			dict "externals" (slice "./pkg/suhjong_wasm.js")
 		) | minify
 	}}{{ $js.Content | safeJS }}</script>
 

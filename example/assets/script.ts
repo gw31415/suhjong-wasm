@@ -46,7 +46,7 @@ async function set_eqns(eqns: string[]) {
 		best_equations: (a: string, b: string, c: string, d: string, e: string) => string,
 		calc_equation: (eqn: string) => number,
 		// @ts-ignore
-	} = await import('/pkg/suhjong_wasm.js')
+	} = await import('./pkg/suhjong_wasm.js')
 	await wasm.default()
 	input.addEventListener('input', async () => {
 		const cards = input.value
