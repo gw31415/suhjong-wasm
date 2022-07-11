@@ -84,7 +84,7 @@
 		min-height: 100dvh
 	}
 
-	@media (max-height: 101vh) {
+	@media (max-height: 100vh) {
 		#container {
 			align-items: center;
 		}
@@ -132,6 +132,22 @@
 <script type="module">
 	import init, {best_equations, calc_equation} from './pkg/suhjong_wasm.js'
 
+	const input = document.getElementById('input')
+
+	const isPC = (() => {
+		const ua = navigator.userAgent
+		for (const d of [
+			'Mobile', 'Android', 'iPad', 'Windows Phone'
+		]) {
+			if (ua.includes(d)) return false
+		}
+		return true
+	})()
+
+	window.onload = () => {
+		if (isPC) input.focus()
+	}
+
 	function insert(str, idx, ins) {
 		return str.slice(0, idx) + ins + str.slice(idx);
 	}
@@ -164,9 +180,10 @@
 
 	(async () => {
 		await init()
-		document.getElementById('input').addEventListener("input", async it => {
-			const cards = it.target.value;
+		input.addEventListener('input', async it => {
+			const cards = input.value
 			if (cards.length === 5) {
+				if (!isPC) input.blur()
 				if (!/^\d{5}$/.test(cards)) return
 				const output = best_equations(cards[0], cards[1], cards[2], cards[3], cards[4])
 				if (output.includes("=")) {
