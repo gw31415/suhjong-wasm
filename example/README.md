@@ -3,6 +3,7 @@
 実際のウェブサイト：[Suhjong Highest Scores](https://gw31415.github.io/suhjong-wasm/)
 
 入力された手札からハイスコアを計算するウェブサイトとなっています。
+[Hugo](https://gohugo.io)を用いて開発しています。
 
 ## ディレクトリ構成
 
