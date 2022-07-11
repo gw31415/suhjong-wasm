@@ -147,14 +147,10 @@
 	window.onload = () => {
 		if (isPC) input.focus()
 	}
-
-	function insert(str, idx, ins) {
-		return str.slice(0, idx) + ins + str.slice(idx);
-	}
-	function set_score(score) {
+	async function set_score(score) {
 		document.getElementById('score').textContent = score.toString()
 	}
-	function set_eqns(eqns) {
+	async function set_eqns(eqns) {
 		if (eqns.length === 0) {
 			document.getElementById("eqn-sec").style.display = "none"
 		}
@@ -166,7 +162,7 @@
 					(eqn[3] === '*' || eqn[3] === '/') &&
 					(eqn[1] === '+' || eqn[1] === '-')
 				) {
-					display = '(' + insert(eqn, 3, ')')
+					display = '(' + eqn.slice(0, 3) + ')' + eqn.slice(3)
 				}
 				display = display.replaceAll('*', '×')
 				display = display.replaceAll(/\D/g, " $& ")
@@ -188,11 +184,15 @@
 				const output = best_equations(cards[0], cards[1], cards[2], cards[3], cards[4])
 				if (output.includes("=")) {
 					const eqns = output.split(";")
-					set_score(calc_equation(eqns[0]))
-					set_eqns(eqns)
+					await Promise.all([
+						set_score(calc_equation(eqns[0])),
+						set_eqns(eqns),
+					])
 				} else {
-					set_score(0)
-					set_eqns([])
+					await Promise.all([
+						set_score(0),
+						set_eqns([]),
+					])
 				}
 				document.getElementById("res").style.display = "block"
 			} else {
