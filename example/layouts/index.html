@@ -38,6 +38,10 @@
 	</div>
 </body>
 
-<script type="module">{{ $js := resources.Get "script.js" | minify }}{{ $js.Content | safeJS }}</script>
+<script>{{
+		$js := resources.Get "script.ts" | js.Build (
+			dict "externals" (slice "/pkg/suhjong_wasm.js")
+		) | minify
+	}}{{ $js.Content | safeJS }}</script>
 
 </html>

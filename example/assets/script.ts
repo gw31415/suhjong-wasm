@@ -1,4 +1,4 @@
-const input = document.getElementById('input')
+const input = document.getElementById('input') as HTMLInputElement
 
 const isPC = (() => {
 	const ua = navigator.userAgent
@@ -13,10 +13,10 @@ const isPC = (() => {
 window.onload = () => {
 	if (isPC) input.focus()
 }
-async function set_score(score) {
+async function set_score(score: number) {
 	document.getElementById('score').textContent = score.toString()
 }
-async function set_eqns(eqns) {
+async function set_eqns(eqns: string[]) {
 	if (eqns.length === 0) {
 		document.getElementById("eqn-sec").style.display = "none"
 	}
@@ -30,8 +30,8 @@ async function set_eqns(eqns) {
 			) {
 				display = '(' + eqn.slice(0, 3) + ')' + eqn.slice(3)
 			}
-			display = display.replaceAll('*', '×')
-			display = display.replaceAll(/\D/g, " $& ")
+			display = display.replace(/\*/g, '×')
+			display = display.replace(/\D/g, " $& ")
 			const li = document.createElement('li')
 			li.textContent = display
 			return li
@@ -41,7 +41,12 @@ async function set_eqns(eqns) {
 }
 
 (async () => {
-	const wasm = await import('./pkg/suhjong_wasm.js')
+	const wasm: {
+		default: () => Promise<any>,
+		best_equations: (a: string, b: string, c: string, d: string, e: string) => string,
+		calc_equation: (eqn: string) => number,
+		// @ts-ignore
+	} = await import('/pkg/suhjong_wasm.js')
 	await wasm.default()
 	input.addEventListener('input', async () => {
 		const cards = input.value
@@ -73,4 +78,3 @@ async function set_eqns(eqns) {
 		}
 	})
 })()
-
