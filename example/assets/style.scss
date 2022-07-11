@@ -1,0 +1,97 @@
+/* skeleton.css and normalize.css for reference */
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+html {
+	font-size: 120%;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+}
+
+body {
+	font-size: 1.5em;
+	/* currently ems cause chrome bug misinterpreting rems on body element */
+	line-height: 1.6;
+	color: #222;
+	margin: 0;
+}
+
+h1 {
+	margin: .5rem 0;
+	font-weight: 300;
+	font-size: 1.2rem;
+	line-height: 1.2;
+}
+
+input {
+	border: solid 0;
+	outline: none;
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+
+ul {
+	list-style-type: square;
+	font-size: 90%;
+	display: inline-block;
+}
+
+li {
+	margin-bottom: 1rem;
+}
+
+body,
+input {
+	text-align: center;
+	max-width: 100%;
+}
+
+li,
+h1 {
+	text-align: left;
+}
+
+#container {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+	min-height: 100dvh
+}
+
+@media (max-height: calc(100vh + 1px)) {
+	#container {
+		align-items: center;
+	}
+}
+
+@media (min-width: 400px) {
+	#container {
+		width: 85%;
+		padding: 0;
+	}
+}
+
+@media (min-width: 550px) {
+	#container {
+		width: 80%;
+	}
+
+	html {
+		font-size: 150%
+	}
+
+	h1 {
+		font-size: 1.5rem;
+	}
+}

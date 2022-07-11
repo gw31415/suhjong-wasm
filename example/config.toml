@@ -1,0 +1,9 @@
+languageCode = 'en-us'
+title = 'Suhjong Highest Scores'
+
+[author]
+name = 'Amadeus_vn'
+
+[params]
+icon = 'favicon.png'
+description = 'A web application to calculate the highest score from a hand in the card game: Suhjong'
