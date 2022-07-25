@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "数雀文字列を扱うcrate: suhjong のwasmバージョンです"
 license = "MIT"
+wasm-opt = false
 # repository = "git@github.com:gw31415/suhjong-wasm"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
